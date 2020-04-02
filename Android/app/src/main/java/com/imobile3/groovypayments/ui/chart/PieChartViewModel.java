@@ -2,7 +2,7 @@ package com.imobile3.groovypayments.ui.chart;
 
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
-import com.imobile3.groovypayments.data.ProductRepository;
+import com.imobile3.groovypayments.data.CartRepository;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -13,10 +13,10 @@ import java.util.List;
 
 public class PieChartViewModel extends ViewModel {
 
-    private ProductRepository mProductRepository;
+    private CartRepository mCartRepository;
 
-    PieChartViewModel(ProductRepository repository) {
-        mProductRepository = repository;
+    PieChartViewModel(CartRepository repository) {
+        mCartRepository = repository;
     }
 
     // Dummy data
