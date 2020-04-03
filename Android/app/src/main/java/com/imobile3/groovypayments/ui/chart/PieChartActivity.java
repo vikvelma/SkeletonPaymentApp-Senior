@@ -1,13 +1,10 @@
 package com.imobile3.groovypayments.ui.chart;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.listener.Event;
-import com.anychart.chart.common.listener.ListenersInterface;
 import com.anychart.charts.Pie;
 import com.anychart.enums.Align;
 import com.anychart.enums.LegendLayout;
@@ -20,8 +17,6 @@ import androidx.lifecycle.ViewModelProviders;
 import java.util.List;
 
 public class PieChartActivity extends BaseActivity {
-    private static final String PRODUCT_NAME = "x";
-    private static final String PRODUCT_QUANTITY = "value";
 
     private ProgressDialog mProgressDialog;
     private PieChartViewModel mViewModel;
@@ -43,28 +38,13 @@ public class PieChartActivity extends BaseActivity {
         AnyChartView chartView = findViewById(R.id.chart_view);
 
         Pie pie = AnyChart.pie();
-
-        pie.setOnClickListener(new ListenersInterface.OnClickListener(new String[] {PRODUCT_NAME,
-                PRODUCT_QUANTITY}) {
-            @Override
-            public void onClick(Event event) {
-                Toast.makeText(PieChartActivity.this, event.getData().get(PRODUCT_NAME) + ":" +
-                        event.getData().get(PRODUCT_QUANTITY), Toast.LENGTH_SHORT).show();
-            }
-        });
-
         pie.data(data);
         pie.labels().position("outside");
         pie.legend()
                 .itemsLayout(LegendLayout.HORIZONTAL_EXPANDABLE)
                 .align(Align.CENTER);
 
-        chartView.setOnRenderedListener(new AnyChartView.OnRenderedListener() {
-            @Override
-            public void onRendered() {
-                mProgressDialog.dismiss();
-            }
-        });
+        chartView.setOnRenderedListener(() -> mProgressDialog.dismiss());
 
         chartView.setChart(pie);
     }
